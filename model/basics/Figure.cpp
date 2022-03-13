@@ -1,6 +1,6 @@
-#include "model.hpp"
+#include "Basics.hpp"
 
-Figure::Figure rotated(Point center = Point()) const {
+Figure Figure::rotated(Point center) const {
 	Figure copy = *this;
 	for (Point& p : copy.points) {
 		p = (p - center).rotated() + center;
@@ -8,7 +8,7 @@ Figure::Figure rotated(Point center = Point()) const {
 	return copy;
 }
 
-Figure::Figure shifted(int index = 0, Point center = Point()) const {
+Figure Figure::shifted(int index, Point center) const {
 	Point shift = center - points[index];
 	Figure copy = *this;
 	for (Point& p : copy.points) {
