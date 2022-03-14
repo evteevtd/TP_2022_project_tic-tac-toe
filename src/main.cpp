@@ -9,7 +9,7 @@ signed main() {
 
 	for (int i = 0; i < 100; ++i) {
 
-		// RectangleField f(, 20);
+		// RectangleField f(60, 101);
 		// f.add_figures(ClassicFigures::straight<4>());
 		InfiniteField f;
 		f.add_figures(ClassicFigures::straight<5>());

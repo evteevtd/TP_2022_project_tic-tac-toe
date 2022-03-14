@@ -42,7 +42,7 @@ std::pair<int, int> out(Board b) {
 
 	using std::cout;
 
-	int spaces = len(max_x - min_x - 1);
+	int spaces = len(max_y - min_y - 1);
 
 	// cout << "  ";
 	for (int i = 0; i < spaces; ++i) cout << ' ';
@@ -74,7 +74,7 @@ Point BasicHumanPlayer::get_move(const IField* field, Symbol symbol) const {
 
 	using std::cout;
 
-	cout << "Enter Your move (row, then colomn):" << std::endl;	
+	cout << "Enter Your move (row, then column):" << std::endl;	
 	int y, x;
 	std::cin >> y >> x;
 	return Point{p.first + x, p.second + y};
