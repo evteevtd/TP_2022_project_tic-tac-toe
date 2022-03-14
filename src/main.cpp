@@ -9,11 +9,11 @@ signed main() {
 
 	for (int i = 0; i < 100; ++i) {
 
-		RectangleField f(3, 3);
-		f.add_figures(ClassicFigures::straight<3>());
+		RectangleField f(5, 5);
+		f.add_figures(ClassicFigures::straight<4>());
 
 		BasicHumanPlayer hp;
-		BasicAIPlayer aip;
+		HeuristicAIPlayer aip;
 
 		Judge j;
 		if (i % 2) {

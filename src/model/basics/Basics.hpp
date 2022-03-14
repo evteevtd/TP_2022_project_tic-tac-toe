@@ -5,10 +5,10 @@
 #include <algorithm>
 
 enum class Symbol {
-	NoCell,
-	Empty,
-	Cross,
-	Zero
+	NoCell = 0,
+	Empty = 1,
+	Cross = 2,
+	Zero = 3
 };
 
 struct Point {
