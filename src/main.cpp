@@ -15,9 +15,14 @@ signed main() {
 		BasicHumanPlayer hp;
 		BasicAIPlayer aip;
 
-		Judge j(&f, {&hp, &aip}, {Symbol::Cross, Symbol::Zero});
-		auto winner = j.run();
+		Judge j;
+		if (i % 2) {
+			j = Judge(&f, {&hp, &aip}, {Symbol::Cross, Symbol::Zero});
+		} else {
+			j = Judge(&f, {&aip, &hp}, {Symbol::Cross, Symbol::Zero});
+		}
 
+		auto winner = j.run();
 
 		std::cout << i << ' ';
 

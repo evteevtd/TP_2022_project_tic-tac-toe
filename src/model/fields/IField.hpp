@@ -14,6 +14,8 @@ public:
 	virtual Board get_board() const = 0;
 	virtual bool set_cell(Point, Symbol) = 0; // возвращает был ли ход выполнен
 
+	virtual IField* copy() const = 0;
+	virtual void undo_move() = 0;
 	virtual ~IField() {}
 protected:
 	std::vector<Figure> victorious_;

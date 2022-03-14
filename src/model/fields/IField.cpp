@@ -40,6 +40,19 @@ bool IField::is_winning(Symbol symbol) const {
 	return false;
 }
 
-bool IField::is_winning_at(Point, Symbol symbol) const {
-	return is_winning(symbol);	
+bool IField::is_winning_at(Point point, Symbol symbol) const {
+	Board board = this->get_board();
+	for (auto figure : victorious_) {
+		for (int i = 0; i < figure.points.size(); ++i) {
+			bool win = true;
+			for (auto p : figure.shifted(i, point).points) {
+				if (board.at(p) != symbol) {
+					win = false;
+					break;
+				}
+			}
+			if (win) return true;
+		}
+	}
+	return false;
 }

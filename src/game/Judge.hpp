@@ -5,6 +5,7 @@
 
 class Judge {
 public:
+	Judge() {}
 	Judge(IField*, std::vector<IPlayer*>, std::vector<Symbol>);
 	IPlayer* run(const int try_limit = 10);
 

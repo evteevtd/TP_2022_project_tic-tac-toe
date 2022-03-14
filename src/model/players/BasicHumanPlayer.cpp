@@ -39,11 +39,16 @@ Point BasicHumanPlayer::get_move(const IField* field, Symbol symbol) const {
 		cout << j << ' ';
 	}
 	cout << '\n';
+	// for (int j = 0; j < max_x - min_x; ++j) {
+	// 	cout << " _";
+	// }
+	// cout << '\n';
+
 
 	for (int i = 0; i < max_y - min_y; ++i) {
 		cout << i << ' ';
 		for (int j = 0; j < max_x - min_x; ++j) {
-			cout << draw__[b.at(Point{min_x + j, min_y + i})] << ' ';
+			cout << draw__[b.at(Point{min_x + j, min_y + i})] << '|';
 		}
 		cout << '\n';
 	}
