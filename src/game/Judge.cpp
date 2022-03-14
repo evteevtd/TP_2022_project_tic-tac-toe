@@ -17,6 +17,9 @@ IPlayer* Judge::run(const int try_limit) {
 		while (!made && ++try_cnt <= try_limit) {
 			mv = players_[who]->get_move(field_, symbols_[who]);
 			made = field_->set_cell(mv, symbols_[who]);
+			if (!made) {
+				std::cerr << "somthing got wrong, try again" << std::endl;
+			}
 		}
 
 		if (try_cnt > try_limit) {

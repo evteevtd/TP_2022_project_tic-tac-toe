@@ -9,14 +9,16 @@ signed main() {
 
 	for (int i = 0; i < 100; ++i) {
 
-		RectangleField f(5, 5);
-		f.add_figures(ClassicFigures::straight<4>());
+		// RectangleField f(, 20);
+		// f.add_figures(ClassicFigures::straight<4>());
+		InfiniteField f;
+		f.add_figures(ClassicFigures::straight<5>());
 
 		BasicHumanPlayer hp;
 		HeuristicAIPlayer aip;
 
 		Judge j;
-		if (i % 2) {
+		if (i % 2 == 0) {
 			j = Judge(&f, {&hp, &aip}, {Symbol::Cross, Symbol::Zero});
 		} else {
 			j = Judge(&f, {&aip, &hp}, {Symbol::Cross, Symbol::Zero});

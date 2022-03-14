@@ -7,3 +7,5 @@
 #include "BasicAIPlayer.cpp"
 #include "HeuristicAIPlayer.hpp"
 #include "HeuristicAIPlayer.cpp"
+#include "RandomAIPlayer.hpp"
+#include "RandomAIPlayer.cpp"

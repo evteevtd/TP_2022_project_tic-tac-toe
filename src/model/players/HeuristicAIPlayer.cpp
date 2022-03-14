@@ -6,10 +6,15 @@
 #include <map>
 #include <iostream>
 #include <limits.h>
+#include <math.h>
 
 // {3, 0, -1, -3}
 
+int debug_cnt = 0;
+
 void how_to_go_heuristic(IField* f, Symbol s, Point& move, int& result, int depth, int time_end) {
+	// std::cout << "how_to_go " << ++debug_cnt << std::endl;
+
 	if (depth == 0 || clock() > time_end) {
 		move = Point{0, 0};
 		result = -1;
@@ -17,6 +22,8 @@ void how_to_go_heuristic(IField* f, Symbol s, Point& move, int& result, int dept
 	}
 
 	Board b = f->get_board();
+	// out(b);
+	// std::cout << std::endl;
 	std::vector<Point> mv = b.get_cells();
 	// random_shuffle(mv.begin(), mv.end());
 	int min_x = INT_MAX;
@@ -31,11 +38,14 @@ void how_to_go_heuristic(IField* f, Symbol s, Point& move, int& result, int dept
 		max_y = std::max(max_y, p.y);
 	}
 
+	// std::cout << "here1 " << std::endl;
+
 	Symbol other = (s == Symbol::Cross ? Symbol::Zero : Symbol::Cross);
 
 	std::vector<std::vector<int>> heat_map(max_x - min_x + 1, std::vector<int>(max_y - min_y + 1, 0));
 	std::vector<Figure> vf = f->get_figures();
 	for (auto p : mv) {
+		// std::cout << p.x << ' ' << p.y << '\n';
 		if (b.at(p) != Symbol::Empty) continue;
 		for (auto figure : vf) {
 			for (int i = 0; i < figure.points.size(); ++i) {
@@ -56,20 +66,24 @@ void how_to_go_heuristic(IField* f, Symbol s, Point& move, int& result, int dept
 				} else {
 					add = (1 << (figure.points.size() - cnt[(int)Symbol::Empty]));
 				}
-				heat_map[p.x][p.y] += add;
+				heat_map[p.x - min_x][p.y - min_y] += add;
 			}
 		}
 	}
+	// std::cout << "here2 " << std::endl;
+
 
 	std::vector<std::pair<int, Point>> variants;
 	for (auto p : mv) {
 		if (b.at(p) != Symbol::Empty) continue;
-		variants.push_back({heat_map[p.x][p.y], p});
+		variants.push_back({heat_map[p.x - min_x][p.y - min_y], p});
 	}
 	sort(variants.rbegin(), variants.rend());
 
 	if (depth != 0) {
-		variants.resize(std::min((int)variants.size(), 2 * depth));
+		int size = (int)round(pow(depth, 1.5) * 1.5);
+		// int size = 2 * depth;
+		variants.resize(std::min((int)variants.size(), size));
 	}
 
 	std::vector<Point> loses;
