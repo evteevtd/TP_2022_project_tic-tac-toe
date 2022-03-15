@@ -59,9 +59,9 @@ void how_to_go_heuristic(IField* f, Symbol s, Point& move, int& result, int dept
 				int add = 0;
 				if (cnt[(int)Symbol::Empty] == 1) {
 					if (cnt[(int)other] == 0) {
-						add = 100001;
+						add = 1000001;
 					} else {
-						add = 1000;
+						add = 10000;
 					}
 				} else {
 					add = (1 << (2 * (figure.points.size() - cnt[(int)Symbol::Empty])));
@@ -168,6 +168,6 @@ Point HeuristicAIPlayer::get_move(const IField* field, Symbol symbol) const {
 		}
 	}
 
-	field_copy->~IField();	
+	delete field_copy;
 	return move;
 }

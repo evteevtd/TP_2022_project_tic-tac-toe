@@ -23,7 +23,7 @@ void battle(const IField* f, IPlayer* p1, IPlayer* p2, int nums = 2) {
 		draws += (winner == nullptr);
 		out(f1->get_board());
 		std::cerr << cnt1 << " : " << draws << " : " << cnt2 << std::endl;
-		f1->~IField();
+		delete f1;
 	}
 	std::cout << "result : " << cnt1 << " : " << draws << " : " << cnt2 << std::endl;
 }
@@ -33,13 +33,15 @@ void battle(const IField* f, IPlayer* p1, IPlayer* p2, int nums = 2) {
 signed main() {
 
 	InfiniteField f;
+	std::cout << "this is infinite field. It will get bigger, as you play\n";
+	// RectangleField f(5, 5);
 	f.add_figures(ClassicFigures::straight<5>());
 
-	HeuristicAIPlayer haip;
-	// HeuristicAIPlayer haip1;
-	BasicHumanPlayer hp;
+	HeuristicAIPlayer p1;
+	// HeuristicAIPlayer p2;
+	BasicHumanPlayer p2;
 
-	battle(&f, &haip, &hp);
+	battle(&f, &p1, &p2);
 
 	return 0;
 }

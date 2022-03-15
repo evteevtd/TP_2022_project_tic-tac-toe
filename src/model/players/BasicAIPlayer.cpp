@@ -102,17 +102,7 @@ Point BasicAIPlayer::get_move(const IField* field, Symbol symbol) const {
 		// std::cerr << depth << std::endl;
 	}
 
-	field_copy->~IField();
+	delete field_copy;
 
 	return move;
-
-	// Board board = field->get_board();
-
-	// Board b = field->get_board();
-	// std::vector<Point> p = b.get_cells();
-	// random_shuffle(p.begin(), p.end());
-	// for (auto i : p) {
-	// 	if (b.at(i) == Symbol::Empty) return i;
-	// }
-	// return Point{0, 0};
 }
