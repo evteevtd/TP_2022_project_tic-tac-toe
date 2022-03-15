@@ -14,6 +14,9 @@ IPlayer* Judge::run(const int try_limit) {
 		bool made = false;
 		Point mv;
 		int try_cnt = 0;
+
+		out(field_->get_board());
+		
 		while (!made && ++try_cnt <= try_limit) {
 			mv = players_[who]->get_move(field_, symbols_[who]);
 			made = field_->set_cell(mv, symbols_[who]);

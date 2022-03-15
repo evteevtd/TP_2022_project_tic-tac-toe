@@ -64,7 +64,7 @@ void how_to_go_heuristic(IField* f, Symbol s, Point& move, int& result, int dept
 						add = 1000;
 					}
 				} else {
-					add = (1 << (figure.points.size() - cnt[(int)Symbol::Empty]));
+					add = (1 << (2 * (figure.points.size() - cnt[(int)Symbol::Empty])));
 				}
 				heat_map[p.x - min_x][p.y - min_y] += add;
 			}
@@ -78,11 +78,12 @@ void how_to_go_heuristic(IField* f, Symbol s, Point& move, int& result, int dept
 		if (b.at(p) != Symbol::Empty) continue;
 		variants.push_back({heat_map[p.x - min_x][p.y - min_y], p});
 	}
+	// random_shuffle(variants.rbegin(), variants.rend());
 	sort(variants.rbegin(), variants.rend());
 
 	if (depth != 0) {
-		int size = (int)round(pow(depth, 1.5) * 1.5);
-		// int size = 2 * depth;
+		// int size = (int)ceil(pow(depth, 3) * 0.1);
+		int size = 2 * depth;
 		variants.resize(std::min((int)variants.size(), size));
 	}
 

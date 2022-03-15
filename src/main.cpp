@@ -2,44 +2,44 @@
 #include "game/game.hpp"
 #include<bits/stdc++.h>
 
-
 #include <iostream>
+
+
+void battle(const IField* f, IPlayer* p1, IPlayer* p2, int nums = 2) {
+	int cnt1 = 0;
+	int cnt2 = 0;
+	int draws = 0;
+	while (nums--) {
+		IField* f1 = f->copy();
+		Judge j;
+		if (nums % 2 == 0) {
+			j = Judge(f1, {p1, p2}, {Symbol::Cross, Symbol::Zero});
+		} else {
+			j = Judge(f1, {p2, p1}, {Symbol::Cross, Symbol::Zero});
+		}
+		auto winner = j.run();
+		cnt1 += (winner == p1);
+		cnt2 += (winner == p2);
+		draws += (winner == nullptr);
+		out(f1->get_board());
+		std::cerr << cnt1 << " : " << draws << " : " << cnt2 << std::endl;
+		f1->~IField();
+	}
+	std::cout << "result : " << cnt1 << " : " << draws << " : " << cnt2 << std::endl;
+}
+
+
 
 signed main() {
 
-	for (int i = 0; i < 100; ++i) {
+	InfiniteField f;
+	f.add_figures(ClassicFigures::straight<5>());
 
-		// RectangleField f(60, 101);
-		// f.add_figures(ClassicFigures::straight<4>());
-		InfiniteField f;
-		f.add_figures(ClassicFigures::straight<5>());
+	HeuristicAIPlayer haip;
+	// HeuristicAIPlayer haip1;
+	BasicHumanPlayer hp;
 
-		BasicHumanPlayer hp;
-		HeuristicAIPlayer aip;
-
-		Judge j;
-		if (i % 2 == 0) {
-			j = Judge(&f, {&hp, &aip}, {Symbol::Cross, Symbol::Zero});
-		} else {
-			j = Judge(&f, {&aip, &hp}, {Symbol::Cross, Symbol::Zero});
-		}
-
-		auto winner = j.run();
-
-		std::cout << i << ' ';
-
-		if (winner == &hp) {
-			std::cout << "Human wins" << std::endl;
-		} else if (winner == &aip) {
-			std::cout << "AI wins" << std::endl;
-		} else {
-			std::cout << "draw" << std::endl;
-		}
-	}
-
-
-
-
+	battle(&f, &haip, &hp);
 
 	return 0;
 }
