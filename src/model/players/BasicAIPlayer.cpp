@@ -8,7 +8,7 @@
 
 // {+3, 0, -1, -3}
 
-void how_to_go_basic(IField* f, Symbol s, Point& move, int& result, int depth, int time_end) {
+void BasicAIPlayer::how_to_go(IField* f, Symbol s, Point& move, int& result, int depth, int time_end) {
 	if (depth == 0 || clock() > time_end) {
 		move = Point{0, 0};
 		result = -1;
@@ -34,7 +34,7 @@ void how_to_go_basic(IField* f, Symbol s, Point& move, int& result, int depth, i
 		Point opp_move;
 		int opp_result;
 		Symbol opp_symbol = (s == Symbol::Cross ? Symbol::Zero : Symbol::Cross);
-		how_to_go_basic(f, opp_symbol, opp_move, opp_result, depth - 1, time_end);
+		how_to_go(f, opp_symbol, opp_move, opp_result, depth - 1, time_end);
 		
 		if (opp_result == -3) {
 			f->undo_move();
@@ -85,7 +85,7 @@ Point BasicAIPlayer::get_move(const IField* field, Symbol symbol) const {
 	for (int depth = 1; depth < 10; ++depth) {
 		Point new_move;
 		int new_result;
-		how_to_go_basic(field_copy, symbol, new_move, new_result, depth, end);
+		how_to_go(field_copy, symbol, new_move, new_result, depth, end);
 		
 		if (clock() > end) {
 			if (new_result == 3 || result == -4) {

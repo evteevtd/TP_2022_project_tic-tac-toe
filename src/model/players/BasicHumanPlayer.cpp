@@ -2,7 +2,7 @@
 
 #include <algorithm>
 #include <iostream>
-
+#include <limits.h>
 
 
 Point BasicHumanPlayer::get_move(const IField* field, Symbol) const {
@@ -17,12 +17,18 @@ Point BasicHumanPlayer::get_move(const IField* field, Symbol) const {
 	}
 
 
-	// auto p = out(b);
-
 	using std::cout;
 
-	cout << "Enter Your move (row, then column):" << std::endl;	
-	int y, x;
-	std::cin >> y >> x;
-	return Point{min_x + x, min_y + y};
+	cout << "Enter Your move (row, then column):" << std::endl;
+
+	std::string s1, s2;
+	std::cin >> s1 >> s2;
+
+	try {
+		int y = std::stoi(s1);
+		int x = std::stoi(s2);
+		return Point{min_x + x, min_y + y};
+	} catch(std::invalid_argument&) {
+		return Point{INT_MIN, INT_MIN};
+	}
 }

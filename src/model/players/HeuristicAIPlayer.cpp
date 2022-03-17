@@ -10,9 +10,8 @@
 
 // {3, 0, -1, -3}
 
-int debug_cnt = 0;
 
-void how_to_go_heuristic(IField* f, Symbol s, Point& move, int& result, int depth, int time_end) {
+void HeuristicAIPlayer::how_to_go(IField* f, Symbol s, Point& move, int& result, int depth, int time_end) {
 	// std::cout << "how_to_go " << ++debug_cnt << std::endl;
 
 	if (depth == 0 || clock() > time_end) {
@@ -83,7 +82,7 @@ void how_to_go_heuristic(IField* f, Symbol s, Point& move, int& result, int dept
 
 	if (depth != 0) {
 		// int size = (int)ceil(pow(depth, 3) * 0.1);
-		int size = 2 * depth;
+		int size = 3 * depth;
 		variants.resize(std::min((int)variants.size(), size));
 	}
 
@@ -104,7 +103,7 @@ void how_to_go_heuristic(IField* f, Symbol s, Point& move, int& result, int dept
 		Point opp_move;
 		int opp_result;
 		Symbol opp_symbol = (s == Symbol::Cross ? Symbol::Zero : Symbol::Cross);
-		how_to_go_basic(f, opp_symbol, opp_move, opp_result, depth - 1, time_end);
+		how_to_go(f, opp_symbol, opp_move, opp_result, depth - 1, time_end);
 		
 		if (opp_result == -3) {
 			f->undo_move();
@@ -147,13 +146,13 @@ void how_to_go_heuristic(IField* f, Symbol s, Point& move, int& result, int dept
 Point HeuristicAIPlayer::get_move(const IField* field, Symbol symbol) const {
 	IField* field_copy = field->copy();
 
-	int end = clock() + CLOCKS_PER_SEC / 4;
+	int end = clock() + CLOCKS_PER_SEC / 8;
 	Point move = Point{0, 0};
 	int result = -4;
 	for (int depth = 1; ; ++depth) {
 		Point new_move;
 		int new_result;
-		how_to_go_heuristic(field_copy, symbol, new_move, new_result, depth, end);
+		how_to_go(field_copy, symbol, new_move, new_result, depth, end);
 
 		if (clock() > end) {
 			if (new_result == 3 || result == -4) {

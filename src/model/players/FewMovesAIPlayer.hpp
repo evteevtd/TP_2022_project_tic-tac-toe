@@ -2,7 +2,7 @@
 
 #include "IPlayer.hpp"
 
-class BasicAIPlayer : public IPlayer {
+class FewMovesAIPlayer : public IPlayer {
 public:
 	Point get_move(const IField*, Symbol) const override;
 private:

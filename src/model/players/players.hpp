@@ -9,3 +9,5 @@
 #include "HeuristicAIPlayer.cpp"
 #include "RandomAIPlayer.hpp"
 #include "RandomAIPlayer.cpp"
+#include "FewMovesAIPlayer.hpp"
+#include "FewMovesAIPlayer.cpp"

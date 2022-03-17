@@ -21,7 +21,6 @@ void battle(const IField* f, IPlayer* p1, IPlayer* p2, int nums = 2) {
 		cnt1 += (winner == p1);
 		cnt2 += (winner == p2);
 		draws += (winner == nullptr);
-		out(f1->get_board());
 		std::cerr << cnt1 << " : " << draws << " : " << cnt2 << std::endl;
 		delete f1;
 	}
@@ -32,16 +31,33 @@ void battle(const IField* f, IPlayer* p1, IPlayer* p2, int nums = 2) {
 
 signed main() {
 
-	InfiniteField f;
+	std::cout << "type \"h\", or \"H\", if you want to play, or type any other button, to see a combat." << std::endl;
+	std::string s = "no";
+	std::cin >> s;
+
+
 	std::cout << "this is infinite field. It will get bigger, as you play\n";
+	
+	InfiniteField f;
 	// RectangleField f(5, 5);
 	f.add_figures(ClassicFigures::straight<5>());
+	
+	HeuristicAIPlayer haip;
+	FewMovesAIPlayer fmaip;
+	BasicHumanPlayer bhp;
 
-	HeuristicAIPlayer p1;
-	HeuristicAIPlayer p2;
-	// BasicHumanPlayer p2;
+	IPlayer* p1;
+	IPlayer* p2;
 
-	battle(&f, &p1, &p2);
+	if (s == "h" || s == "H") {
+		p1 = &fmaip;
+		p2 = &bhp;
+	} else {
+		p1 = &haip;
+		p2 = &fmaip;
+	}
+
+	battle(&f, p1, p2, 2);
 
 	return 0;
 }

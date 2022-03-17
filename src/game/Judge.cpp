@@ -32,9 +32,10 @@ IPlayer* Judge::run(const int try_limit) {
 			std::cerr << "some player can not make a move(((" << std::endl;
 			return nullptr;
 		}
-
-		if (field_->is_winning_at(mv, symbols_[who])) return players_[who];
-
 		last_move = mv;
+		if (field_->is_winning_at(mv, symbols_[who])) {
+			out(field_->get_board(), last_move);
+			return players_[who];
+		}
 	}
 }
