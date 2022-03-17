@@ -3,7 +3,7 @@
 #include <algorithm>
 
 
-Point RandomAIPlayer::get_move(const IField* field, Symbol symbol) const {
+Point RandomAIPlayer::get_move(const IField* field, Symbol) const {
 	// do smth genious;
 	Board b = field->get_board();
 	std::vector<Point> p = b.get_cells();

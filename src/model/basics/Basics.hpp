@@ -17,6 +17,9 @@ struct Point {
 	Point operator+(Point other) const { return Point{x + other.x, y + other.y}; }
 	Point rotated() const { return Point{-y, x}; }
 };
+bool operator==(const Point& lhs, const Point& rhs) {
+	return lhs.x == rhs.x && lhs.y == rhs.y;
+}
 bool operator<(const Point& lhs, const Point& rhs) {
 	return std::tie(lhs.x, lhs.y) < std::tie(rhs.x, rhs.y);
 }

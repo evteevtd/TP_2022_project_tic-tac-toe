@@ -38,8 +38,8 @@ signed main() {
 	f.add_figures(ClassicFigures::straight<5>());
 
 	HeuristicAIPlayer p1;
-	// HeuristicAIPlayer p2;
-	BasicHumanPlayer p2;
+	HeuristicAIPlayer p2;
+	// BasicHumanPlayer p2;
 
 	battle(&f, &p1, &p2);
 

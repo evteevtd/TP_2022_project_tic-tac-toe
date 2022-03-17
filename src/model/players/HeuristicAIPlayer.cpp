@@ -147,7 +147,7 @@ void how_to_go_heuristic(IField* f, Symbol s, Point& move, int& result, int dept
 Point HeuristicAIPlayer::get_move(const IField* field, Symbol symbol) const {
 	IField* field_copy = field->copy();
 
-	int end = clock() + CLOCKS_PER_SEC;
+	int end = clock() + CLOCKS_PER_SEC / 4;
 	Point move = Point{0, 0};
 	int result = -4;
 	for (int depth = 1; ; ++depth) {
