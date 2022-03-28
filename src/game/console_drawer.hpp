@@ -13,8 +13,10 @@ public:
     void draw(const IBoard*, Point last_move = {INT_MIN, INT_MIN});
 
 private:
-    inline static const std::string RED = "\033[31m";
-    inline static const std::string RESET = "\033[0m";
+    struct Colors {
+        inline static const std::string RED = "\033[31m";
+        inline static const std::string RESET = "\033[0m";
+    };
 
     inline static const std::map<Symbol, char> symbols = {
         {Symbol::Cross, 'x'},

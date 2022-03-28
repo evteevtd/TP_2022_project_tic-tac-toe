@@ -35,9 +35,9 @@ void ConsoleDrawer::draw(const IBoard* board, Point last_move) {
 
         for (int j = 0; j < x_dist; ++j) {
             space(len(j) - 1);
-            if (Point{x_min + j, y_min + i} == last_move) std::cout << RED;
+            if (Point{x_min + j, y_min + i} == last_move) std::cout << Colors::RED;
             std::cout << symbols.at(board->at(Point{x_min + j, y_min + i}));
-            if (Point{x_min + j, y_min + i} == last_move) std::cout << RESET;
+            if (Point{x_min + j, y_min + i} == last_move) std::cout << Colors::RESET;
             std::cout << '|';
         }
         std::cout << '\n';

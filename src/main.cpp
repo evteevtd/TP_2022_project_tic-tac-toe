@@ -8,7 +8,7 @@
 
 #include "game/judge.hpp"
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #include <iostream>
 
 
