@@ -1,15 +1,22 @@
 #include "console_graphics.hpp"
 
+ConsoleGraphics::ConsoleGraphics() {
+    inputer_.graphics_ = this;
+}
+
+IGraphics::Inputer* ConsoleGraphics::getInputer() {
+    return &inputer_;
+}
+
 void ConsoleGraphics::drawField(const IField* field) {
     const IBoard* board = field->getBoard();
     Point last_move = field->getLastMove();
 
-    int x_min, y_min, x_max, y_max;
+    int x_max, y_max;
     std::vector<Point> cells = board->getCells();
-    calcLimits(cells, x_min, y_min, x_max, y_max);
-    last_offset = Point(x_min, y_min);
-    int x_dist = x_max - x_min + 1;
-    int y_dist = y_max - y_min + 1;
+    calcLimits(cells, offset_.x, offset_.y, x_max, y_max);
+    int x_dist = x_max - offset_.x + 1;
+    int y_dist = y_max - offset_.y + 1;
 
     int spaces = len(y_dist);
     space(spaces);
@@ -24,9 +31,9 @@ void ConsoleGraphics::drawField(const IField* field) {
 
         for (int j = 0; j < x_dist; ++j) {
             space(len(j) - 1);
-            if (Point{x_min + j, y_min + i} == last_move) std::cout << Colors::RED;
-            std::cout << symbols.at(board->at(Point{x_min + j, y_min + i}));
-            if (Point{x_min + j, y_min + i} == last_move) std::cout << Colors::RESET;
+            if (Point{offset_.x + j, offset_.y + i} == last_move) std::cout << Colors::RED;
+            std::cout << symbols.at(board->at(Point{offset_.x + j, offset_.y + i}));
+            if (Point{offset_.x + j, offset_.y + i} == last_move) std::cout << Colors::RESET;
             std::cout << '|';
         }
         std::cout << '\n';
@@ -52,13 +59,9 @@ void ConsoleGraphics::space(int cnt) {
     for (int i = 0; i < cnt; ++i) std::cout << ' ';
 }
 
-Point ConsoleGraphics::getLastOffset() {
-    return last_offset;
-}
-
 void ConsoleGraphics::startGame(const IField* field, std::vector<Symbol>) {
     const IBoard* board = field->getBoard();
     std::vector<Point> cells = board->getCells();
-    calcLimits(cells, last_offset.x, last_offset.y);
+    calcLimits(cells, offset_.x, offset_.y);
 }
 

@@ -3,7 +3,7 @@
 #include "../model/basics/point.hpp"
 #include "../model/fields/ifield.hpp"
 #include "../model/players/iplayer.hpp"
-#include "graphics/igraphics.hpp"
+#include "igraphics.hpp"
 
 #include <vector>
 

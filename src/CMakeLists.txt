@@ -14,8 +14,7 @@ add_executable(target
         model/players/human_player.cpp
         model/players/random_ai_player.cpp
         interface/game.cpp
-        interface/graphics/igraphics.cpp
-        interface/graphics/console_graphics.cpp
-        interface/move_input/imove_input.cpp
-        interface/move_input/console_move_input.cpp
+        interface/igraphics.cpp
+        interface/console/console_graphics.cpp
+        interface/console/console_inputer.cpp
     )

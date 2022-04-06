@@ -1,6 +1,6 @@
 #pragma once
 
-#include "igraphics.hpp"
+#include "../igraphics.hpp"
 
 #include <iostream>
 #include <string>
@@ -8,11 +8,30 @@
 
 class ConsoleGraphics : public IGraphics {
 public:
+    ConsoleGraphics();
+    ConsoleGraphics(const ConsoleGraphics&) = delete;
+    ConsoleGraphics& operator=(const ConsoleGraphics&) = delete;
+
     void startGame(const IField*, std::vector<Symbol>) override;
     void drawField(const IField*) override;
     void messageError(const std::string&) override;
 
-    Point getLastOffset();
+    class Inputer : public IGraphics::Inputer {
+    public:
+        Point getMove() override;
+        
+    private:
+        Inputer() {}
+        ConsoleGraphics* graphics_;
+
+        friend ConsoleGraphics;
+    };
+
+    IGraphics::Inputer* getInputer() override;
+
+private:
+    Inputer inputer_;
+    Point offset_ = Point(0, 0);
 
 private:
     struct Colors {
@@ -28,8 +47,5 @@ private:
     };
 
     static int len(int);
-
     static void space(int cnt);
-
-    Point last_offset = Point(0, 0);
 };

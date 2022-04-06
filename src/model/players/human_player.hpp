@@ -1,12 +1,12 @@
 #pragma once
 
 #include "iplayer.hpp"
-#include "../../interface/move_input/imove_input.hpp"
+#include "../../interface/igraphics.hpp"
 
 class HumanPlayer : public IPlayer {
 public:
     Point getMove(const IField*, Symbol) const override;
-    void setMoveInput(IMoveInput*);
+    void setMoveInput(IGraphics::Inputer*);
 private:
-    IMoveInput* inputer_;
+    IGraphics::Inputer* inputer_;
 };

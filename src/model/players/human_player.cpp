@@ -7,6 +7,6 @@ Point HumanPlayer::getMove(const IField*, Symbol) const {
     return inputer_->getMove();
 }
 
-void HumanPlayer::setMoveInput(IMoveInput* inputer) {
+void HumanPlayer::setMoveInput(IGraphics::Inputer* inputer) {
     inputer_ = inputer;
 }

@@ -1,15 +1,15 @@
-#pragma once
+// #pragma once
 
-#include "imove_input.hpp"
-#include "console_graphics.hpp"
+// #include "../imove_input.hpp"
+// #include "console_graphics.hpp"
 
-#include <iostream>
+// #include <iostream>
 
-class ConsoleMoveInput : public IMoveInput {
-public:
-    Point getMove() override;
-    ConsoleMoveInput(ConsoleGraphics*);
+// class ConsoleMoveInput : public IMoveInput {
+// public:
+//     Point getMove() override;
+//     ConsoleMoveInput(ConsoleGraphics*);
 
-private:
-    ConsoleGraphics* drawer_;
-};
+// private:
+//     ConsoleGraphics* drawer_;
+// };

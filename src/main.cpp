@@ -7,8 +7,7 @@
 #include "model/players/random_ai_player.hpp"
 
 #include "interface/game.hpp"
-#include "interface/graphics/console_graphics.hpp"
-#include "interface/move_input/console_move_input.hpp"
+#include "interface/console/console_graphics.hpp"
 
 #include <bits/stdc++.h>
 #include <iostream>
@@ -24,12 +23,10 @@ int main() {
 	field.addFigures(ClassicFigures::straight(4));
 
 	ConsoleGraphics output;
-	ConsoleMoveInput input(&output);
-	
 	RandomAIPlayer raip;
 
 	HumanPlayer hp;
-	hp.setMoveInput(&input);
+	hp.setMoveInput(output.getInputer());
 
 	IPlayer* p1 = &hp;
 	IPlayer* p2;
