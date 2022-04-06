@@ -1,17 +1,21 @@
-project(tic-tac-toe)
 cmake_minimum_required(VERSION 3.16.3)
+project(tic-tac)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
-# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
-
-
-add_subdirectory(interface)
-add_subdirectory(model)
-
-target_link_libraries(interface INTERFACE model)
-
-add_executable(target main.cpp)
-
-target_link_libraries(target PUBLIC model interface)
+add_executable(target
+        main.cpp
+        model/basics/point.cpp
+        model/basics/figure.cpp
+        model/basics/rectangle_board.cpp
+        model/basics/map_board.cpp
+        model/fields/ifield.cpp
+        model/fields/rectangle_field.cpp
+        model/players/human_player.cpp
+        model/players/random_ai_player.cpp
+        interface/game.cpp
+        interface/graphics/igraphics.cpp
+        interface/graphics/console_graphics.cpp
+        interface/move_input/imove_input.cpp
+        interface/move_input/console_move_input.cpp
+    )

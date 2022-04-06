@@ -1,9 +1,10 @@
 #include "console_move_input.hpp"
 
-Point ConsoleMoveInput::getMove() {
-    // int min_x, min_y;
-    // calcLimits(field->getBoard()->getCells(), min_x, min_y);
+ConsoleMoveInput::ConsoleMoveInput(ConsoleGraphics* drawer) : drawer_(drawer) {}
 
+Point ConsoleMoveInput::getMove() {
+    Point offset = drawer_->getLastOffset();
+    
     std::cout << "Enter Your move (row, then column):" << std::endl;
 
     std::string s1, s2;
@@ -12,8 +13,7 @@ Point ConsoleMoveInput::getMove() {
     try {
         int y = std::stoi(s1);
         int x = std::stoi(s2);
-        return Point(x, y);
-        // return Point{min_x + x, min_y + y};
+        return offset + Point(x, y);
     } catch (std::invalid_argument&) {
         return Point();
     }

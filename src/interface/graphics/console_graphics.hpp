@@ -8,8 +8,11 @@
 
 class ConsoleGraphics : public IGraphics {
 public:
+    void startGame(const IField*, std::vector<Symbol>) override;
     void drawField(const IField*) override;
     void messageError(const std::string&) override;
+
+    Point getLastOffset();
 
 private:
     struct Colors {
@@ -27,4 +30,6 @@ private:
     static int len(int);
 
     static void space(int cnt);
+
+    Point last_offset = Point(0, 0);
 };

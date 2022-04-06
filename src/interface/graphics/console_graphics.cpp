@@ -7,6 +7,7 @@ void ConsoleGraphics::drawField(const IField* field) {
     int x_min, y_min, x_max, y_max;
     std::vector<Point> cells = board->getCells();
     calcLimits(cells, x_min, y_min, x_max, y_max);
+    last_offset = Point(x_min, y_min);
     int x_dist = x_max - x_min + 1;
     int y_dist = y_max - y_min + 1;
 
@@ -32,7 +33,7 @@ void ConsoleGraphics::drawField(const IField* field) {
     }
 }
 
-void messageError(const std::string& s) {
+void ConsoleGraphics::messageError(const std::string& s) {
     std::cerr << s << std::endl;
 }
 
@@ -50,3 +51,14 @@ int ConsoleGraphics::len(int number) {
 void ConsoleGraphics::space(int cnt) {
     for (int i = 0; i < cnt; ++i) std::cout << ' ';
 }
+
+Point ConsoleGraphics::getLastOffset() {
+    return last_offset;
+}
+
+void ConsoleGraphics::startGame(const IField* field, std::vector<Symbol>) {
+    const IBoard* board = field->getBoard();
+    std::vector<Point> cells = board->getCells();
+    calcLimits(cells, last_offset.x, last_offset.y);
+}
+
