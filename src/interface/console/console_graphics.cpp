@@ -40,6 +40,11 @@ void ConsoleGraphics::drawField(const IField* field) {
     }
 }
 
+void ConsoleGraphics::playerWin(const IField* field, Symbol symbol) {
+    drawField(field);
+    std::cout << "Congratulations to " << symbols.at(symbol) << std::endl;
+}
+
 void ConsoleGraphics::messageError(const std::string& s) {
     std::cerr << s << std::endl;
 }

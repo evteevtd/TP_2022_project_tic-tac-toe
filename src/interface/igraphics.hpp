@@ -6,8 +6,6 @@
 #include <string>
 #include <vector>
 
-class IMoveInput;
-
 class IGraphics {
 public:
     virtual void startGame(const IField*, std::vector<Symbol>);

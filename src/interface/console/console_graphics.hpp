@@ -14,6 +14,7 @@ public:
 
     void startGame(const IField*, std::vector<Symbol>) override;
     void drawField(const IField*) override;
+    void playerWin(const IField*, Symbol) override;
     void messageError(const std::string&) override;
 
     class Inputer : public IGraphics::Inputer {
