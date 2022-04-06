@@ -1,16 +1,15 @@
 #pragma once
 
-#include "../model/basics/point.hpp"
-#include "../model/basics/iboard.hpp"
+#include "igraphics.hpp"
 
 #include <iostream>
 #include <string>
 #include <map>
 
-
-class ConsoleDrawer {
+class ConsoleGraphics : public IGraphics {
 public:
-    void draw(const IBoard*, Point last_move = {INT_MIN, INT_MIN});
+    void drawField(const IField*) override;
+    void messageError(const std::string&) override;
 
 private:
     struct Colors {

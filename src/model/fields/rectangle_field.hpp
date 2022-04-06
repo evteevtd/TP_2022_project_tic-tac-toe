@@ -10,6 +10,7 @@ public:
     bool setCell(Point, Symbol) override;
     IField* copy() const override;
     void undoMove() override;
+    Point getLastMove() const override;
 
 private:
     std::vector<Point> moves_;

@@ -54,6 +54,10 @@ bool IField::isWinningAt(Point point, Symbol symbol) const {
     return false;
 }
 
+Point IField::getLastMove() const {
+    return Point();
+}
+
 IField::~IField() {
     delete board_;
 }

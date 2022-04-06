@@ -25,3 +25,8 @@ void RectangleField::undoMove() {
     board_->setCell(moves_.back(), Symbol::Empty);
     moves_.pop_back();
 }
+
+Point RectangleField::getLastMove() const {
+    if (moves_.empty()) return Point();
+    return moves_.back();
+}

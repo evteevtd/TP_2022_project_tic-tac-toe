@@ -1,21 +1,9 @@
-#include "console_drawer.hpp"
+#include "console_graphics.hpp"
 
-int ConsoleDrawer::len(int number) {
-    if (number == 0) return 1;
-    int ans = 0;
-    int pw10 = 1;
-    while (pw10 <= number) {
-        ans += 1;
-        pw10 *= 10;
-    }
-    return ans;
-}
+void ConsoleGraphics::drawField(const IField* field) {
+    const IBoard* board = field->getBoard();
+    Point last_move = field->getLastMove();
 
-void ConsoleDrawer::space(int cnt) {
-    for (int i = 0; i < cnt; ++i) std::cout << ' ';
-}
-
-void ConsoleDrawer::draw(const IBoard* board, Point last_move) {
     int x_min, y_min, x_max, y_max;
     std::vector<Point> cells = board->getCells();
     calcLimits(cells, x_min, y_min, x_max, y_max);
@@ -42,4 +30,23 @@ void ConsoleDrawer::draw(const IBoard* board, Point last_move) {
         }
         std::cout << '\n';
     }
+}
+
+void messageError(const std::string& s) {
+    std::cerr << s << std::endl;
+}
+
+int ConsoleGraphics::len(int number) {
+    if (number == 0) return 1;
+    int ans = 0;
+    int pw10 = 1;
+    while (pw10 <= number) {
+        ans += 1;
+        pw10 *= 10;
+    }
+    return ans;
+}
+
+void ConsoleGraphics::space(int cnt) {
+    for (int i = 0; i < cnt; ++i) std::cout << ' ';
 }

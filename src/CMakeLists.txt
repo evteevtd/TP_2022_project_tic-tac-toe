@@ -7,11 +7,11 @@ set(CMAKE_CXX_STANDARD 17)
 # set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 
 
-add_subdirectory(game)
+add_subdirectory(interface)
 add_subdirectory(model)
 
-target_link_libraries(game INTERFACE model)
+target_link_libraries(interface INTERFACE model)
 
 add_executable(target main.cpp)
 
-target_link_libraries(target PUBLIC model game)
+target_link_libraries(target PUBLIC model interface)

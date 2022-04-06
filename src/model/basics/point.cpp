@@ -1,5 +1,9 @@
 #include "point.hpp"
 
+Point::Point() : x(INT_MIN), y(INT_MIN) {}
+
+Point::Point(int x, int y) : x(x), y(y) {}
+
 Point Point::operator-(Point other) const {
     return Point{x - other.x, y - other.y};
 }
