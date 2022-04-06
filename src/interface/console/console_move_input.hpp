@@ -1,7 +1,7 @@
 #pragma once
 
 #include "imove_input.hpp"
-#include "../graphics/console_graphics.hpp"
+#include "console_graphics.hpp"
 
 #include <iostream>
 

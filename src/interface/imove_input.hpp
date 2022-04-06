@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../model/basics/point.hpp"
+#include "../model/basics/point.hpp"
 
 class IMoveInput {
 public:
