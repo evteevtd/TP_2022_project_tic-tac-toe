@@ -17,4 +17,5 @@ add_executable(target
         interface/igraphics.cpp
         interface/console/console_graphics.cpp
         interface/console/console_inputer.cpp
+        interface/console/console_launcher.cpp
     )

@@ -5,6 +5,8 @@
 
 class HumanPlayer : public IPlayer {
 public:
+    HumanPlayer() {}
+    HumanPlayer(IGraphics::Inputer*);
     Point getMove(const IField*, Symbol) const override;
     void setMoveInput(IGraphics::Inputer*);
 private:

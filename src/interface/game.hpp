@@ -6,17 +6,21 @@
 #include "igraphics.hpp"
 
 #include <vector>
+#include <memory>
 
 class Game {
 public:
-    Game(IField*, std::vector<IPlayer*>, std::vector<Symbol>, IGraphics*);
-    IPlayer* run();
+    void setField(std::shared_ptr<IField>);
+    void addPlayer(std::shared_ptr<IPlayer>, Symbol);
+    void setGraphics(std::shared_ptr<IGraphics>);
+
+    std::shared_ptr<IPlayer> run();
 
 private:
-    IField* field_;
-    std::vector<IPlayer*> players_;
+    std::shared_ptr<IField> field_;
+    std::vector<std::shared_ptr<IPlayer>> players_;
     std::vector<Symbol> symbols_;
-    IGraphics* graphics_;
+    std::shared_ptr<IGraphics> graphics_;
 
     Point getMove(int player_index);
 };
