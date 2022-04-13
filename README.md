@@ -6,3 +6,6 @@
 
 ### Про проект
 - чтобы запустить проект, достаточно написать в консоли ./run.sh
+
+#### UML диаграмма
+- https://drive.google.com/file/d/15pvs9NJVro9UbmpkHyQz7QCH_f1t3nri/view?usp=sharing 
