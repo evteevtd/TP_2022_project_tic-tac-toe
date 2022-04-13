@@ -13,7 +13,7 @@ add_executable(target
         model/fields/rectangle_field.cpp
         model/players/human_player.cpp
         model/players/random_ai_player.cpp
-        interface/game.cpp
+        game/game.cpp
         interface/igraphics.cpp
         interface/console/console_graphics.cpp
         interface/console/console_inputer.cpp

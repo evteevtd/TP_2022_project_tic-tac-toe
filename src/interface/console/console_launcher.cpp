@@ -22,10 +22,10 @@ int input_integer(int from, int to, const std::string& on_error = "something got
     while (true) {  
         try {
             result = std::stoi(responce);
-            if (from <= result && result <= to) return result;
+            if (from <= result && result <= to) break;
         } catch (std::invalid_argument&) {
             print({on_error});
-        }        
+        }
     }
 
     return result;

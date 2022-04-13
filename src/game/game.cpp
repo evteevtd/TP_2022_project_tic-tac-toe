@@ -17,17 +17,17 @@ Point Game::getMove(int player_index) {
     Point res;
     while (true) {
         res = players_[player_index]->getMove(field_.get(), symbols_[player_index]);
-        if (field_->setCell(res, symbols_[player_index])) return res;
+        if (field_->setCell(res, symbols_[player_index])) break;
         graphics_->messageError("incorrect move, try again");
     }
-    return Point();
+    return res;
 }
 
 std::shared_ptr<IPlayer> Game::run() {
     graphics_->startGame(field_.get(), symbols_);
 
     for (int step = 0; ; ++step) {
-        if (!(field_->hasMove())) return std::shared_ptr<IPlayer>(nullptr);
+        if (!(field_->hasMove())) break;
 
         graphics_->drawField(field_.get());
 
