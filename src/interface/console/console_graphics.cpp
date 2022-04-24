@@ -2,10 +2,36 @@
 
 ConsoleGraphics::ConsoleGraphics() {
     inputer_.graphics_ = this;
+    setSymbols();
+}
+
+std::map<Symbol, char> ConsoleGraphics::symbols;
+
+void ConsoleGraphics::setSymbols() {
+    if (symbols.empty()) {
+        symbols = {
+            {Symbol::NoCell, '#'},
+            {Symbol::Empty, ' '},
+            {Symbol::Cross, 'x'},
+            {Symbol::Zero, 'o'},
+            {Symbol::FirstUndefined, '+'},
+            {Symbol{Symbol::FirstUndefined + 1}, '*'}
+        };
+    }
 }
 
 IGraphics::Inputer* ConsoleGraphics::getInputer() {
     return &inputer_;
+}
+
+void ConsoleGraphics::printSymbol(Symbol symbol, bool is_last = false) {
+    if (is_last) std::cout << Colors::RED;
+    if (symbols.find(symbol) == symbols.end()) {
+        std::cout << '?';
+    } else {
+        std::cout << symbols.at(symbol);
+    }
+    if (is_last) std::cout << Colors::RESET;
 }
 
 void ConsoleGraphics::drawField(const IField* field) {
@@ -31,19 +57,26 @@ void ConsoleGraphics::drawField(const IField* field) {
 
         for (int j = 0; j < x_dist; ++j) {
             space(len(j) - 1);
-            if (Point{offset_.x + j, offset_.y + i} == last_move) std::cout << Colors::RED;
-            std::cout << symbols.at(board->at(Point{offset_.x + j, offset_.y + i}));
-            if (Point{offset_.x + j, offset_.y + i} == last_move) std::cout << Colors::RESET;
+            Point move = Point{offset_.x + j, offset_.y + i};
+            printSymbol(board->at(move), move == last_move);
             std::cout << '|';
         }
         std::cout << '\n';
     }
 }
 
-void ConsoleGraphics::playerWin(const IField* field, Symbol symbol) {
+void ConsoleGraphics::onPlayerWin(const IField* field, Symbol symbol) {
     drawField(field);
-    std::cout << "Congratulations to " << symbols.at(symbol) << std::endl;
+    std::cout << "Congratulations to ";
+    printSymbol(symbol);
+    std::cout << std::endl;
 }
+
+void ConsoleGraphics::onDraw(const IField* field) {
+    drawField(field);
+    std::cout << "Draw!" << std::endl;
+}
+
 
 void ConsoleGraphics::messageError(const std::string& s) {
     std::cerr << s << std::endl;
@@ -64,9 +97,9 @@ void ConsoleGraphics::space(int cnt) {
     for (int i = 0; i < cnt; ++i) std::cout << ' ';
 }
 
-void ConsoleGraphics::startGame(const IField* field, std::vector<Symbol>) {
-    const IBoard* board = field->getBoard();
-    std::vector<Point> cells = board->getCells();
-    calcLimits(cells, offset_.x, offset_.y);
+void ConsoleGraphics::onGameStart(const IField* field, std::vector<Symbol>) {
+    if (dynamic_cast<const InfiniteField*>(field) != nullptr) {
+        std::cout << "You are playing on an ininite field.\nIt will get bigger as you play." << std::endl;
+    }
 }
 

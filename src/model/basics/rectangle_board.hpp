@@ -6,8 +6,7 @@
 
 class RectangleBoard : public IBoard {
 public:
-    RectangleBoard(int x_size, int y_size)
-        : cells_(std::vector<std::vector<Symbol>>(x_size, std::vector<Symbol>(y_size, Symbol::Empty))) {}
+    RectangleBoard(int x_size, int y_size);
 
     Symbol at(Point p) const override;
     std::vector<Point> getCells() const override;

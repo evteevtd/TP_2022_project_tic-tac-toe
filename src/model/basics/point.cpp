@@ -1,5 +1,24 @@
 #include "point.hpp"
 
+const Symbol Symbol::NoCell = Symbol(-1);
+const Symbol Symbol::Empty = Symbol(0);
+const Symbol Symbol::Cross = Symbol(1);
+const Symbol Symbol::Zero = Symbol(2);
+const Symbol Symbol::FirstDefined = Symbol(1);
+const Symbol Symbol::FirstUndefined = Symbol(3);
+
+Symbol::Symbol(int value) : value(value) {}
+
+bool operator==(Symbol lhs, Symbol rhs) {
+    return lhs.value == rhs.value;
+}
+bool operator!=(Symbol lhs, Symbol rhs) {
+    return lhs.value != rhs.value;
+}
+bool operator<(Symbol lhs, Symbol rhs) {
+    return lhs.value < rhs.value;
+}
+
 Point::Point() : x(INT_MIN), y(INT_MIN) {}
 
 Point::Point(int x, int y) : x(x), y(y) {}
@@ -19,7 +38,9 @@ Point Point::rotated() const {
 bool operator==(const Point& lhs, const Point& rhs) {
     return lhs.x == rhs.x && lhs.y == rhs.y;
 }
-
+bool operator!=(const Point& lhs, const Point& rhs) {
+    return lhs.x != rhs.x || lhs.y != rhs.y;
+}
 bool operator<(const Point& lhs, const Point& rhs) {
     return std::tie(lhs.x, lhs.y) < std::tie(rhs.x, rhs.y);
 }

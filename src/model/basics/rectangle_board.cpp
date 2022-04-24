@@ -1,7 +1,10 @@
 #include "rectangle_board.hpp"
 
+RectangleBoard::RectangleBoard(int x_size, int y_size) 
+        : cells_(std::vector<std::vector<Symbol>>(x_size, std::vector<Symbol>(y_size, Symbol::Empty))) {}
+
 bool RectangleBoard::checkCell(Point p) const {
-    return !(p.x < 0 || p.x >= cells_.size() || p.y < 0 || p.y > cells_[0].size());
+    return !(p.x < 0 || p.x >= cells_.size() || p.y < 0 || p.y >= cells_[0].size());
 }
 
 Symbol RectangleBoard::at(Point p) const {
