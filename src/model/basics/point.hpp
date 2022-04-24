@@ -13,6 +13,8 @@ enum class Symbol : char {
 
 struct Point {
 	int x, y;
+	Point();
+	Point(int, int);
 	Point operator-(Point other) const; 
 	Point operator+(Point other) const;
 	Point rotated() const;

@@ -7,13 +7,12 @@
 
 
 struct ClassicFigures {
-    template <size_t N>
-    static std::vector<Figure> straight() {
+    static inline std::vector<Figure> straight(int n) {
         std::vector<Figure> res;
         for (int dir = 0; dir < 4; ++dir) {
             Figure f;
             Point p{0, 0};
-            for (int i = 0; i < N; ++i) {
+            for (int i = 0; i < n; ++i) {
                 f.points.push_back(p);
                 p = p + Point{dx[dir], dy[dir]};
             }

@@ -20,6 +20,7 @@ public:
     virtual bool setCell(Point, Symbol) = 0; // возвращает был ли ход выполнен
     virtual IField* copy() const = 0;
     virtual void undoMove() = 0;
+    virtual Point getLastMove() const;
     virtual ~IField();
 protected:
     std::vector<Figure> victorious_;
