@@ -8,7 +8,7 @@
 
 void print(const std::vector<std::string>& strings);
 
-int my_stoi(const std::string& from);
+int myStoi(const std::string& from);
 
 std::vector<int> inputIntegers(int count, int from, int to, const std::string& on_error = "try again");
 

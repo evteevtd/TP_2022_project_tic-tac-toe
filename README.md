@@ -2,7 +2,8 @@
 
 ### Оценки
 - checkpoint_1 done (10)
-- checkpoint_2 6 (for now)
+- checkpoint_2 done (10)
+- checkpoint_3 done (10)
 
 ### Про проект
 - чтобы собрать проект, нужно написать в консоли ./compile.sh

@@ -4,7 +4,7 @@ void print(const std::vector<std::string>& strings) {
     for (auto str : strings) std::cout << str << std::endl;
 }
 
-int my_stoi(const std::string& from) {
+int myStoi(const std::string& from) {
     int res = 0;
     try {
         res = std::stoi(from);
@@ -34,7 +34,7 @@ std::vector<int> inputIntegers(int count, int from, int to, const std::string& o
             std::string responce;
             for (int i = 0; i < count; ++i) { 
                 if (!(input >> responce)) throw std::invalid_argument("too few arguments");
-                result[i] = my_stoi(responce);
+                result[i] = myStoi(responce);
                 if (from <= result[i] && result[i] <= to) continue;
                 throw std::invalid_argument("some value is out of range");
             }
