@@ -1,34 +1,12 @@
-
 #include "console_launcher.hpp"
 
-#include <limits.h>
+#include <vector>
 
 void ConsoleLauncher::launch() {
     chooseGraphics();
     chooseField();
     choosePlayers();
     game_.run();
-}
-
-void print(const std::vector<std::string>& strings) {
-    for (auto str : strings) std::cout << str << std::endl;
-}
-
-int input_integer(int from, int to, const std::string& on_error = "something got wrong, try again") {
-    std::string responce;
-    std::cin >> responce;
-
-    int result = 0;
-    while (true) {  
-        try {
-            result = std::stoi(responce);
-            if (from <= result && result <= to) break;
-        } catch (std::invalid_argument&) {
-            print({on_error});
-        }
-    }
-
-    return result;
 }
 
 void ConsoleLauncher::setRectangleField(int x_size, int y_size, int streat_len) {
@@ -38,22 +16,29 @@ void ConsoleLauncher::setRectangleField(int x_size, int y_size, int streat_len) 
 }
 
 void ConsoleLauncher::chooseCustomRectangleField() {
-    print({"choose horisontal size of a field"});
-    int x_size = input_integer(1, 15, "size of a field should be an integer from 1 to 15");
-    int y_size = input_integer(1, 15, "size of a field should be an integer from 1 to 15");
-    print({"choose how many in the row should be a win"});
-    int streat_len = input_integer(1, std::max(x_size, y_size), "it should be an integer and game should be winnable");
-    setRectangleField(x_size, y_size, streat_len);
+    print({"choose horisontal and vertical size of a field"});
+    auto xy = inputIntegers(2, 1, 15, "you should type two integers from 1 to 15 in one line");
+
+    print({"choose how many in a row should be considered a win"});
+    int streat_len = inputInteger(1, std::max(xy[0], xy[1]), "it should be an integer from 1 to " + std::to_string(std::max(xy[0], xy[1])));
+    setRectangleField(xy[0], xy[1], streat_len);
+}
+
+void ConsoleLauncher::setInfiniteField() {
+    auto field = std::make_shared<InfiniteField>();
+    field->addFigures(ClassicFigures::straight(5));
+    game_.setField(field);
 }
 
 void ConsoleLauncher::chooseField() {
     print({ "choose a field to play:",
             "options:",
-            "1 : Standard 3x3 field:",
-            "2 : Standard 5x5 field:",
-            "3 : Custom rectangle field:",
-            "please, type a number (1, 2 or 3)"});
-    int field_responce = input_integer(1, 3);
+            "1 : Standard 3x3 field",
+            "2 : Standard 5x5 field",
+            "3 : Custom rectangle field",
+            "4 : Infinite field",
+            "please, type a number (1 to 4)"});
+    int field_responce = inputInteger(1, 4, "");
 
     switch (field_responce) {
     case 1:
@@ -64,6 +49,9 @@ void ConsoleLauncher::chooseField() {
         break;
     case 3:
         chooseCustomRectangleField();
+        break;
+    case 4:
+        setInfiniteField();
         break;
     }
 }
@@ -82,21 +70,16 @@ void ConsoleLauncher::addPlayer(int option, Symbol s) {
 }
 
 void ConsoleLauncher::choosePlayers() {
-    print({"choose a game mode:",
-            "type 1, if you want to play with a friend",
-            "type 2, if you want to play with a bot"});
-    int res = input_integer(1, 2);
-
-    switch (res) {
-    case 1:
-        addPlayer(0, Symbol::Cross);
-        addPlayer(0, Symbol::Zero);
-        break;
-    case 2:
-        addPlayer(0, Symbol::Cross);
-        addPlayer(1, Symbol::Zero);
-        break;
-    }
+    print({"choose the number of players : 2 to 4"});
+    int cnt = inputInteger(2, 4, "the number of players must be an integer between 2 and 4");
+    print({ "select player types:",
+            "enter " + std::to_string(cnt) + " numbers in one line",
+            "enter 0 for every human player, and 1 for every bot"
+            });
+    std::vector<int> responce = inputIntegers(cnt, 0, 1,
+            "you must type " + std::to_string(cnt) + " integers from 0 to 1 in one line");
+    for (int i = 0; i < cnt; ++i)
+        addPlayer(responce[i], Symbol::FirstDefined + i);
 }
 
 void ConsoleLauncher::chooseGraphics() {

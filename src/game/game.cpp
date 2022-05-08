@@ -24,7 +24,7 @@ Point Game::getMove(int player_index) {
 }
 
 std::shared_ptr<IPlayer> Game::run() {
-    graphics_->startGame(field_.get(), symbols_);
+    graphics_->onGameStart(field_.get(), symbols_);
 
     for (int step = 0; ; ++step) {
         if (!(field_->hasMove())) break;
@@ -35,9 +35,10 @@ std::shared_ptr<IPlayer> Game::run() {
         Point last_move = getMove(who);
 
         if (field_->isWinningAt(last_move, symbols_[who])) {
-            graphics_->playerWin(field_.get(), symbols_[who]);
+            graphics_->onPlayerWin(field_.get(), symbols_[who]);
             return players_[who];
         }
     }
+    graphics_->onDraw(field_.get());
     return std::shared_ptr<IPlayer>(nullptr);
 }

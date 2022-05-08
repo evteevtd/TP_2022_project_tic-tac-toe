@@ -11,10 +11,12 @@ add_executable(target
         model/basics/map_board.cpp
         model/fields/ifield.cpp
         model/fields/rectangle_field.cpp
+        model/fields/infinite_field.cpp
         model/players/human_player.cpp
         model/players/random_ai_player.cpp
         game/game.cpp
         interface/igraphics.cpp
+        interface/console/console_functions.cpp
         interface/console/console_graphics.cpp
         interface/console/console_inputer.cpp
         interface/console/console_launcher.cpp

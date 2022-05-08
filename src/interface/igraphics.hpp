@@ -8,9 +8,10 @@
 
 class IGraphics {
 public:
-    virtual void startGame(const IField*, std::vector<Symbol>);
+    virtual void onGameStart(const IField*, std::vector<Symbol>);
     virtual void drawField(const IField*) = 0;
-    virtual void playerWin(const IField*, Symbol);
+    virtual void onPlayerWin(const IField*, Symbol);
+    virtual void onDraw(const IField*);
     virtual void messageError(const std::string&);
 
     class Inputer {

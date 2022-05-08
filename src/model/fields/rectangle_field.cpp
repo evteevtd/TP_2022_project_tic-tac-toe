@@ -9,16 +9,17 @@ RectangleField::RectangleField(const IBoard* board) {
 }
 
 bool RectangleField::setCell(Point p, Symbol s) {
+    if (board_->at(p) != Symbol::Empty) return false;
     if (!board_->setCell(p, s)) return false;
     moves_.push_back(p);
     return true;
 }
 
 IField* RectangleField::copy() const {
-    RectangleField* r = new RectangleField(board_);
-    r->addFigures(victorious_);
-    r->moves_ = moves_;
-    return r;
+    RectangleField* f = new RectangleField(board_);
+    f->addFigures(victorious_);
+    f->moves_ = moves_;
+    return f;
 }
 
 void RectangleField::undoMove() {
